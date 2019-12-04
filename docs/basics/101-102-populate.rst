@@ -240,9 +240,11 @@ A :command:`datalad status` should now be empty, and our dataset's history shoul
    # lets make the output a bit more concise with the --oneline option
    $ git log --oneline
 
+"Wonderful! I'm getting a hang on this quickly", you think. "Version controlling
+files is not as hard as I thought!"
 
-Downloading and adding content to your dataset "manually" has two disadvantages,
-though: For one, it requires you to download the content *and* save it. Compared
+But downloading and adding content to your dataset "manually" has two disadvantages:
+For one, it requires you to download the content *and* save it. Compared
 to a workflow with no DataLad dataset, this is one additional command you have
 to perform (and `that additional time adds up, after a while <https://xkcd.com/1205/>`_).
 But a more serious disadvantage is that you have no electronic record of
@@ -253,13 +255,17 @@ you got the content from -- and brains are not made for such tasks.
 
 Luckily, DataLad has a command that will solve both of these problems:
 The :command:`datalad download-url` command (:manpage:`datalad-download-url` manual).
-This command can retrieve content from a URL (``https``, ``http``, or ``ftp`` or ``s3``)
-and save it into the dataset together with a human-readable commit message and a
+We will dive deeper into the benefits of using it in later chapters, but for now,
+we'll start with best-practice-building.
+:command:`datalad download-url` can retrieve content from a URL (following any
+URL-scheme from ``https``, ``http``, or ``ftp`` or ``s3``)
+and save it into the dataset together with a human-readable commit message *and* a hidden,
 machine-readable record of the origin of the content. This saves you time, and captures
 :term:`provenance` information about the data you add to your dataset. To experience
 this, lets add a final book, a
 `beginner's guide to bash <http://www.tldp.org/LDP/Bash-Beginners-Guide/Bash-Beginners-Guide.pdf>`_,
-to the dataset:
+to the dataset. We provide the command with a URL, a pointer to the dataset the
+file should be saved in
 
 .. runrecord:: _examples/DL-101-102-112
    :language: console
@@ -272,6 +278,7 @@ to the dataset:
      -m "add beginners guide on bash" \
      -O books/bash_guide.pdf \
 
+
 Afterwards, a fourth book is inside your ``books/`` directory:
 
 .. runrecord:: _examples/DL-101-102-113
@@ -279,12 +286,12 @@ Afterwards, a fourth book is inside your ``books/`` directory:
    :workdir: dl-101/DataLad-101
    :cast: 01_dataset_basics
 
-   $ tree
+   $ ls books
 
 However, the :command:`datalad status` command does not return any output -- the
 dataset state is "clean":
 
-.. runrecord:: _examples/DL-101-102-113
+.. runrecord:: _examples/DL-101-102-114
    :language: console
    :workdir: dl-101/DataLad-101
    :cast: 01_dataset_basics
@@ -293,11 +300,22 @@ dataset state is "clean":
 
 This is because the :command:`datalad download-url` took care of saving for you:
 
-.. runrecord:: _examples/DL-101-102-114
+.. runrecord:: _examples/DL-101-102-115
    :language: console
    :workdir: dl-101/DataLad-101
 
    $ git log -p -n 1
+
+At this point in time, the biggest advantage may seem to be the time save. However,
+soon you will experience how useful it is to have DataLad keep track for you where
+file content came from. Let's take a final look at the history of your dataset at
+this point:
+
+.. runrecord:: _examples/DL-101-102-116
+   :language: console
+   :workdir: dl-101/DataLad-101
+
+   $ git log --oneline
 
 Well done! Your ``DataLad-101`` dataset and its history are slowly growing.
 
