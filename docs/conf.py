@@ -82,6 +82,7 @@ extensions = [
     'sphinxcontrib.plantuml',
     'dataladhandbook_support',
     'notfound.extension',
+    'sphinx_copybutton'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -160,6 +161,9 @@ smartquotes = True
 # Trim spaces before footnote references that are necessary for the reST parser
 # to recognize the footnote, but do not look too nice in the output.
 trim_footnote_reference_space = True
+
+# copybutton extension configuration
+copybutton_prompt_text = '$ '
 
 # -- Options for HTML output ---------------------------------------------------
 html_baseurl = 'http://handbook.datalad.org/'
