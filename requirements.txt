@@ -15,6 +15,7 @@ requests
 six
 snowballstemmer
 Sphinx==2.1.2
+sphinx-copybutton
 sphinx-sitemap
 sphinxcontrib-websupport
 sphinx-notfound-page
